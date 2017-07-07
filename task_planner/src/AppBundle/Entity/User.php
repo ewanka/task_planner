@@ -143,4 +143,9 @@ class User extends BaseUser
     {
         return $this->comments;
     }
+    
+     public function isOwner(User $user)
+    {
+        return $this->user->getId() == $user->getId();
+    }
 }

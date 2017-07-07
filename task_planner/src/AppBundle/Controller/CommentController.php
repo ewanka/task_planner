@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Comment controller.
  *
@@ -16,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CommentController extends Controller
 {
+
     /**
      * Lists all comment entities.
      *
@@ -28,10 +28,10 @@ class CommentController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $comments = $em->getRepository('AppBundle:Comment')->loggedInUser($this->getUser());
+        $comments = $em->getRepository('AppBundle:Comment')->findByUser($this->getUser());
 
         return $this->render('comment/index.html.twig', array(
-            'comments' => $comments,
+                    'comments' => $comments,
         ));
     }
 
@@ -50,9 +50,9 @@ class CommentController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $comment->setUser($this->getUser());
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
@@ -61,8 +61,8 @@ class CommentController extends Controller
         }
 
         return $this->render('comment/new.html.twig', array(
-            'comment' => $comment,
-            'form' => $form->createView(),
+                    'comment' => $comment,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -75,11 +75,15 @@ class CommentController extends Controller
      */
     public function showAction(Comment $comment)
     {
+        if (!$comment->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+
         $deleteForm = $this->createDeleteForm($comment);
 
         return $this->render('comment/show.html.twig', array(
-            'comment' => $comment,
-            'delete_form' => $deleteForm->createView(),
+                    'comment' => $comment,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -92,6 +96,10 @@ class CommentController extends Controller
      */
     public function editAction(Request $request, Comment $comment)
     {
+        if (!$comment->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+
         $deleteForm = $this->createDeleteForm($comment);
         $editForm = $this->createForm('AppBundle\Form\CommentType', $comment);
         $editForm->handleRequest($request);
@@ -103,9 +111,9 @@ class CommentController extends Controller
         }
 
         return $this->render('comment/edit.html.twig', array(
-            'comment' => $comment,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'comment' => $comment,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -118,6 +126,10 @@ class CommentController extends Controller
      */
     public function deleteAction(Request $request, Comment $comment)
     {
+        if (!$comment->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+
         $form = $this->createDeleteForm($comment);
         $form->handleRequest($request);
 
@@ -140,9 +152,10 @@ class CommentController extends Controller
     private function createDeleteForm(Comment $comment)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('comment_delete', array('id' => $comment->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('comment_delete', array('id' => $comment->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }

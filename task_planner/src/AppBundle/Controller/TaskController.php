@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Controller\CategoryController;
 use AppBundle\Entity\Task;
+use AppBundle\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +28,7 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tasks = $em->getRepository('AppBundle:Task')->loggedInUser($this->getUser());
+        $tasks = $em->getRepository('AppBundle:Task')->findByUser($this->getUser());
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -42,12 +44,14 @@ class TaskController extends Controller
      */
     public function newAction(Request $request)
     {
+           
         $task = new Task();
-        $form = $this->createForm('AppBundle\Form\TaskType', $task);
+        $form = $this->createForm('AppBundle\Form\TaskType', $task, ['user' => $this->getUser()]);
         $form->handleRequest($request);
-
+        
+       
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $task->setUser($this->getUser());
             
             $em = $this->getDoctrine()->getManager();
@@ -93,6 +97,10 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
+        if (!$task->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+        
         $deleteForm = $this->createDeleteForm($task);
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
@@ -146,4 +154,9 @@ class TaskController extends Controller
             ->getForm()
         ;
     }
+    
+   
+    
+    
+
 }

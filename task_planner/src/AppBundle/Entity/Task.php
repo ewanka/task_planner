@@ -52,7 +52,7 @@ class Task
      * @var integer
      *
      * @ORM\Column(name="priority", type="smallint", nullable=false)
-     * @Assert\Range(min=1, max=2)
+     * @Assert\Range(min=0, max=3)
      * @Assert\NotBlank()
      */
     private $priority;
@@ -61,7 +61,7 @@ class Task
      * @var integer
      *
      * @ORM\Column(name="status", type="smallint", nullable=false)
-     * @Assert\Range(min=1, max=2)
+     * @Assert\Range(min=0, max=2)
      * @Assert\NotBlank()
      */
     private $status;
@@ -199,7 +199,7 @@ class Task
        
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="userId",nullable=false, referencedColumnName="id")
      */
     private $user;
 
@@ -275,9 +275,34 @@ class Task
     {
         return $this->user->getId() == $user->getId();
     }
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     * @ORM\JoinColumn(name="categoryId",nullable=false, referencedColumnName="id")
+     */
+    
+    private $category;
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Task
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
-
-
-
-
-

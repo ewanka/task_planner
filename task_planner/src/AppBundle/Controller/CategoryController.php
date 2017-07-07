@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AppBundle:Category')->loggedInUser($this->getUser());
+        $categories = $em->getRepository('AppBundle:Category')->findByUser($this->getUser());
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -73,6 +73,10 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {       
+        if (!$category->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+        
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
@@ -90,6 +94,10 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        if (!$category->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+        
         $deleteForm = $this->createDeleteForm($category);
         $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
@@ -116,6 +124,10 @@ class CategoryController extends Controller
      */
     public function deleteAction(Request $request, Category $category)
     {
+        if (!$category->isOwner($this->getUser())) {
+            throw $this->createAccessDeniedException('Idz pan stad...');
+        }
+        
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
 

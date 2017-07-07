@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Comment
 {
+
     /**
      * @var int
      *
@@ -38,7 +39,6 @@ class Comment
      * 
      */
     private $date;
-
 
     /**
      * Get id
@@ -95,13 +95,13 @@ class Comment
     {
         return $this->date;
     }
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      *  @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Task", inversedBy="comments")
      *  @ORM\JoinColumn(name="taskId", referencedColumnName="id")
@@ -153,9 +153,15 @@ class Comment
     {
         return $this->tasks;
     }
-    
-    public function __toString() {
-    return $this->name;
-}
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function isOwner(User $user)
+    {
+        return $this->user->getId() == $user->getId();
+    }
 
 }

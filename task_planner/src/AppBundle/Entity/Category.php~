@@ -92,4 +92,15 @@ class Category
     {
         return $this->user;
     }
+    
+     public function isOwner(User $user)
+    {
+        return $this->user->getId() == $user->getId();
+    }
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    
+    private $tasks;
 }

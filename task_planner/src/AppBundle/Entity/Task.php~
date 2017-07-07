@@ -52,7 +52,7 @@ class Task
      * @var integer
      *
      * @ORM\Column(name="priority", type="smallint", nullable=false)
-     * @Assert\Range(min=1, max=2)
+     * @Assert\Range(min=0, max=3)
      * @Assert\NotBlank()
      */
     private $priority;
@@ -61,7 +61,7 @@ class Task
      * @var integer
      *
      * @ORM\Column(name="status", type="smallint", nullable=false)
-     * @Assert\Range(min=1, max=2)
+     * @Assert\Range(min=0, max=2)
      * @Assert\NotBlank()
      */
     private $status;
@@ -98,6 +98,10 @@ class Task
     public function getName()
     {
         return $this->name;
+    }
+    
+    public function __toString() {
+    return $this->name;
     }
 
     /**
@@ -226,4 +230,61 @@ class Task
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="tasks")
      */
     private $comments;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     * @return Task
+     */
+    public function addComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+    
+    public function isOwner(User $user)
+    {
+        return $this->user->getId() == $user->getId();
+    }
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
+     */
+    
+    private $category;
 }
+
+
+
+
+

@@ -92,4 +92,60 @@ class Category
     {
         return $this->user;
     }
+    
+     public function isOwner(User $user)
+    {
+        return $this->user->getId() == $user->getId();
+    }
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    
+    private $tasks;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \AppBundle\Entity\Task $tasks
+     * @return Category
+     */
+    public function addTask(\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \AppBundle\Entity\Task $tasks
+     */
+    public function removeTask(\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
