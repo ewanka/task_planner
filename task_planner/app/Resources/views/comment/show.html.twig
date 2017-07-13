@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <ol class="breadcrumb">
                 <li><a href="{{ path('homepage') }}">Home</a></li>
                 <li><a href="{{ path('comment_index') }}">Comment</a></li>
@@ -13,19 +13,15 @@
 
     <h1>Comment</h1>
 
-    <table>
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ comment.id }}</td>
-            </tr>
             <tr>
                 <th>Content</th>
                 <td>{{ comment.content }}</td>
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ comment.date }}</td>
+                <td>{{ comment.date|date('Y-m-d H:i') }}</td>
             </tr>
         </tbody>
     </table>

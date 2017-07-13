@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <ol class="breadcrumb">
                 <li><a href="{{ path('homepage') }}">Home</a></li>
                 <li class="active">Comment</li>
@@ -11,21 +11,21 @@
     </div>
     <h1>Comments list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Content</th>
                 <th>Date</th>
+                <th>Task</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for comment in comments %}
             <tr>
-                <td><a href="{{ path('comment_show', { 'id': comment.id }) }}">{{ comment.id }}</a></td>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.date }}</td>
+                <td>{{ comment.tasks }}</td>
                 <td>
                     <ul>
                         <li>

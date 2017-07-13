@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <ol class="breadcrumb">
             <li><a href="{{ path('homepage') }}">Home</a></li>
             <li><a href="{{ path('category_index') }}">Category</a></li>
@@ -12,12 +12,8 @@
 </div>
     <h1>Category</h1>
 
-    <table>
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ category.name }}</td>

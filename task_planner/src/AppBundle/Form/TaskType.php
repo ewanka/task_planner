@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Repository\CommentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Controller\TaskController;
@@ -22,7 +24,7 @@ class TaskType extends AbstractType
         $builder
                 ->add('name')
                 ->add('description')
-                ->add('deadline')
+                ->add('deadline', DateType::class, ['years' => range(date('Y'), date('Y') + 10)])
                 ->add('priority')
                 ->add('status');
 
@@ -37,6 +39,18 @@ class TaskType extends AbstractType
             },
             'choice_label' => 'name',
         ));
+
+       /* $builder->add('comment', EntityType::class, array(
+            'class' => 'AppBundle:Comment',
+            'query_builder' => function (CommentRepository $er) use ($user) {
+                return $er
+                    ->createQueryBuilder('cm')
+                    ->where('cm.user = :user')
+                    ->orderBy('cm.id', 'ASC')
+                    ->setParameter('user', $user);
+            },
+            'choice_label' => 'content',
+        ));*/
     }
 
     /**

@@ -14,6 +14,6 @@ class TaskRepository extends EntityRepository
 {
     public function findByUser($user)
     {
-        return $this->findBy(array('user'=> $user->getId()));
+        return $this->findBy(array('user'=> $user));
     }
 }

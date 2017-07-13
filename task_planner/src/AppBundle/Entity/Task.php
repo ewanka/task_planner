@@ -39,11 +39,15 @@ class Task
     private $description;
 
     /**
-     * @var \string
+     * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="string", length=255)
+     * @ORM\Column(name="deadline", type="datetime")
      * @Assert\DateTime()
      * @Assert\NotBlank()
+     * @Assert\GreaterThanOrEqual(
+     *     value = "now"
+     * )
+     *
      * 
      */
     private $deadline;

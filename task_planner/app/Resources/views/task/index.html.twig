@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <ol class="breadcrumb">
                 <li><a href="{{ path('homepage') }}">Home</a></li>
                 <li class="active">Task</li>
@@ -11,27 +11,29 @@
     </div>
     <h1>Tasks list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Deadline</th>
                 <th>Priority</th>
                 <th>Status</th>
+                <th>Comment</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for task in tasks %}
             <tr>
-                <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
-                <td>{{ task.deadline }}</td>
+                <td>{{ task.deadline|date('Y-m-d H:i') }}</td>
                 <td>{{ task.priority }}</td>
                 <td>{{ task.status }}</td>
+                <td>
+                    <a href="{{ path('comment_show', { 'id': task.id }) }}">comments</a>
+                </td>
                 <td>
                     <ul>
                         <li>
@@ -44,6 +46,7 @@
                 </td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
 
