@@ -10,7 +10,7 @@ kategorii i komentarzy dla nich.
 
 Aplikacja tworzona jest z zastosowaniem frameworku Symfony ( w wersji 2.8) i bundle KnpMenu, oraz frameworku Bootstrap.
 
-[image of log in site]
+![image of log in site]
 (https://github.com/ewanka/task_planner/blob/master/task_planner/photo/login.png?raw=true)
 
 
