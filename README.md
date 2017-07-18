@@ -8,8 +8,15 @@ W moim przypadku tworzenie aplikacji nadal jest w toku, niemniej jest ona już g
 bym mogła zaprezentować przynajmniej tak podstawowe funkcje jak: rejestracja, logowanie, dodawanie zadań,
 kategorii i komentarzy dla nich. 
 
+Stopniowo aplikacja będzie uzupełniana o nowe funkcjonalności oraz rozwiązania z dziedziny user experience.
+Na przykład - dodawanie statusu i priorytetu zadań obecnie odbywa się na podstawie wyboru liczby z listy, 
+docelowo liczby zostaną zamienione na hasła ("urgent", "minor", "done", "undone").
+
+
 Aplikacja tworzona jest z zastosowaniem frameworku Symfony ( w wersji 2.8) i bundle KnpMenu, oraz frameworku Bootstrap.
 
+
+###Oto zrzuty ekranu z przykładowych stron aplikacji
 Strona logowania:
 
 ![LoginImg](task_planner/photo/login.png)
@@ -21,3 +28,7 @@ Strona rejestracji:
 Strona dodawania zadania:
 
 ![NewTaskImg](task_planner/photo/newtask.png)
+
+Strona edycji zadania:
+
+![TaskEditionImg](task_planner/photo/taskedition.png)
