@@ -55,8 +55,8 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="priority", type="smallint", nullable=false)
-     * @Assert\Range(min=0, max=3)
+     * @ORM\Column(name="priority", type="string", nullable=false)
+     *
      * @Assert\NotBlank()
      */
     private $priority;
@@ -64,8 +64,8 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="smallint", nullable=false)
-     * @Assert\Range(min=0, max=2)
+     * @ORM\Column(name="status", type="string", nullable=false)
+     * 
      * @Assert\NotBlank()
      */
     private $status;
