@@ -98,7 +98,7 @@ class TaskController extends Controller
     public function editAction(Request $request, Task $task)
     {
         if (!$task->isOwner($this->getUser())) {
-            throw $this->createAccessDeniedException('Idz pan stad...');
+            throw $this->createAccessDeniedException('nie masz dostępu...');
         }
         
         $deleteForm = $this->createDeleteForm($task);

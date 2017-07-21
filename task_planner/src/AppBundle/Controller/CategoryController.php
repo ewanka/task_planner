@@ -95,7 +95,7 @@ class CategoryController extends Controller
     public function editAction(Request $request, Category $category)
     {
         if (!$category->isOwner($this->getUser())) {
-            throw $this->createAccessDeniedException('Idz pan stad...');
+            throw $this->createAccessDeniedException('nie masz dostępu...');
         }
         
         $deleteForm = $this->createDeleteForm($category);

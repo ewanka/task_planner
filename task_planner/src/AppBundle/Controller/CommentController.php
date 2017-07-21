@@ -76,7 +76,7 @@ class CommentController extends Controller
     public function showAction(Comment $comment)
     {
         if (!$comment->isOwner($this->getUser())) {
-            throw $this->createAccessDeniedException('Idz pan stad...');
+            throw $this->createAccessDeniedException('nie masz dostępu...');
         }
 
         $deleteForm = $this->createDeleteForm($comment);
