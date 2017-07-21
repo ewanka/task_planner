@@ -108,7 +108,7 @@ class TaskController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('task_edit', array('id' => $task->getId()));
+            return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
 
         return $this->render('task/edit.html.twig', array(
