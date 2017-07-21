@@ -65,7 +65,7 @@ class Task
      * @var integer
      *
      * @ORM\Column(name="status", type="string", nullable=false)
-     * 
+     *
      * @Assert\NotBlank()
      */
     private $status;
