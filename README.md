@@ -16,7 +16,9 @@ docelowo liczby zostaną zamienione na hasła ("urgent", "minor", "done", "undon
 Aplikacja tworzona jest z zastosowaniem frameworku Symfony ( w wersji 2.8) i bundle KnpMenu, oraz frameworku Bootstrap.
 
 
-###Oto zrzuty ekranu z przykładowych stron aplikacji
+### Oto zrzuty ekranu z przykładowych stron aplikacji
+
+
 Strona logowania:
 
 ![LoginImg](task_planner/photo/login.png)
