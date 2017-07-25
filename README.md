@@ -9,8 +9,8 @@ bym mogła zaprezentować przynajmniej tak podstawowe funkcje jak: rejestracja, 
 kategorii i komentarzy dla nich. 
 
 Stopniowo aplikacja będzie uzupełniana o nowe funkcjonalności oraz rozwiązania z dziedziny user experience.
-Na przykład - dodawanie statusu i priorytetu zadań obecnie odbywa się na podstawie wyboru liczby z listy, 
-docelowo liczby zostaną zamienione na hasła ("urgent", "minor", "done", "undone").
+Na przykład - dodawanie statusu i priorytetu zadań obecnie odbywa się na podstawie wpisania dowolnego tekstu, 
+będą one hasłami z listy ( np. "urgent", "minor", "done", "undone").
 
 
 Aplikacja tworzona jest z zastosowaniem frameworku Symfony ( w wersji 2.8) i bundle KnpMenu, oraz frameworku Bootstrap.
